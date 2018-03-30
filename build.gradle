@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://repo.wilsonsinquest.com/nexus/content/repositories/releases/"
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.github.patrickianwilson:ProjectConventionsGradlePlugin:1.0.+"
+    }
+}
+
+
+project.version = 'dev.1'
+project.group = "com.github.patrickianwilson"
+
+if (System.getenv("BUILD_NUMBER") != null) {
+    def majorVersion = "1.0" //eventually override with a lookup
+    project.version = "${majorVersion}.${System.getenv("BUILD_NUMBER")}"
+}
+
+ext {
+    serviceName = "template-infrastructure-template"  //changeme!
+    dockerTag = "${project.serviceName}:latest"
+    dockerFile = "$projectDir/src/main/deploy/Dockerfile"
+    dockerImagePath="us.gcr.io/inlaid-citron-94802/services/${project.serviceName}:${project.version}"
+}
+
+apply plugin: "facet.docker"
