@@ -17,7 +17,8 @@ project.group = "com.github.patrickianwilson"
 
 if (System.getenv("BUILD_NUMBER") != null) {
     def majorVersion = "1.0" //eventually override with a lookup
-    project.version = "${majorVersion}.${System.getenv("BUILD_NUMBER")}"
+    def buildSetVersion = "0" //eventually look this up too.
+    project.version = "${majorVersion}.${buildSetVersion}.${System.getenv("BUILD_NUMBER")}"
 }
 
 ext {
