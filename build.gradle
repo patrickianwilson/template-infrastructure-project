@@ -23,9 +23,9 @@ if (System.getenv("BUILD_NUMBER") != null) {
 
 ext {
     moduleName = "template-infrastructure-template"  //changeme!
-    dockerTag = "${project.serviceName}:latest"
+    dockerTag = "${project.moduleName.toLowerCase()}:latest"
     dockerFile = "$projectDir/src/main/deploy/Dockerfile"
-    dockerImagePath="us.gcr.io/inlaid-citron-94802/services/${project.moduleName}:${project.version}"
+    dockerImagePath="us.gcr.io/inlaid-citron-94802/services/${project.moduleName.toLowerCase()}:${project.version}"
 }
 
 apply plugin: "facet.docker"
